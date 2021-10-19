@@ -17,5 +17,5 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . -t standardsimg.azurecr.io/testGithub:${{ github.sha }}
-        docker push standardsimg.azurecr.io/testGithub:${{ github.sha }}
+        docker build . -t standardsimg.azurecr.io/testgithub:${{ github.sha }}
+        docker push standardsimg.azurecr.io/testgithub:${{ github.sha }}
