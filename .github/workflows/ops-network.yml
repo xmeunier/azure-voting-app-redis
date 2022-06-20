@@ -1,4 +1,4 @@
-name: 🚧 Docker Image Deploy
+name: 🚧 OPS- network policy
 
 on:
   workflow_dispatch:
