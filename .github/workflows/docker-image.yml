@@ -18,9 +18,9 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . -t standardsimg.azurecr.io/vote-front:latest
+        docker build app-vote -t standardsimg.azurecr.io/vote-front:latest
         docker push standardsimg.azurecr.io/vote-front:latest            
         
-        docker build Dockerfile-back -t standardsimg.azurecr.io/vote-back:latest
+        docker build . -t standardsimg.azurecr.io/vote-back:latest
         docker push standardsimg.azurecr.io/vote-back:latest      
 
