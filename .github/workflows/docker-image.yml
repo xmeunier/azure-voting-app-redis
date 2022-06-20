@@ -1,15 +1,16 @@
-name: Docker Image CI
+name: 2. Docker Image CI
 
 on:
   workflow_dispatch:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - uses: azure/docker-login@v1
       with:
         login-server: standardsimg.azurecr.io
@@ -17,5 +18,9 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build azure-vote -t standardsimg.azurecr.io/testgithub:${{ github.sha }}
-        docker push standardsimg.azurecr.io/testgithub:${{ github.sha }}
+        docker build . -t standardsimg.azurecr.io/vote-front:latest
+        docker push standardsimg.azurecr.io/vote-front:latest            
+        
+        docker build Dockerfile-back -t standardsimg.azurecr.io/vote-back:latest
+        docker push standardsimg.azurecr.io/vote-back:latest      
+
