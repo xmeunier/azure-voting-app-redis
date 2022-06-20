@@ -40,7 +40,7 @@ jobs:
         images: |
           ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:latest
           
-     - uses: azure/k8s-deploy@v1
+    - uses: azure/k8s-deploy@v1
       env:
         NAMESPACE: "vote"
         APP_NAME: "vote-back"
