@@ -1,3 +1,1 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.6
-RUN pip install redis
-ADD /azure-vote/azure-vote /app
+FROM bitnami/redis:6.0.8
