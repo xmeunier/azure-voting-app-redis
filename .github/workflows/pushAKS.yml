@@ -1,0 +1,53 @@
+name: 4. Docker Image Deploy
+
+on:
+  workflow_dispatch:
+    branches: [ main ]
+  workflow_run:
+    workflows: ["2. Docker Image CI"]
+    types: [completed]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    #if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+    - uses: actions/checkout@v2  
+    - uses: azure/aks-set-context@v1
+      env:
+        CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        CLUSTER_NAME: "ClusterBYCN"
+        CLUSTER_RESOURCE_GROUP: "Test-AKS-BYCN_group"
+        NAMESPACE: "vote"
+      with:
+        creds: '${{ env.CREDENTIALS }}'
+        cluster-name: ${{ env.CLUSTER_NAME }}
+        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+    
+#    - run: kubectl create namespace ${{ env.NAMESPACE }} --dry-run -o json | kubectl apply -f -
+#      env:
+#        NAMESPACE: "nvr-core"
+    
+    - uses: azure/k8s-deploy@v1
+      env:
+        NAMESPACE: "vote"
+        APP_NAME: "vote-front"
+      with:
+        namespace: ${{ env.NAMESPACE }}
+        manifests: |
+          manifests/namespace.yml
+          manifests/deployment-front.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:latest
+          
+     - uses: azure/k8s-deploy@v1
+      env:
+        NAMESPACE: "vote"
+        APP_NAME: "vote-back"
+      with:
+        namespace: ${{ env.NAMESPACE }}
+        manifests: |
+          manifests/namespace.yml
+          manifests/deployment-back.yml
+        images: |
+          ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:latest
