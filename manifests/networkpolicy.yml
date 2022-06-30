@@ -6,13 +6,13 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-    app: azure-vote-front
+        app: azure-vote-front
   PolicyTypes:
-    - Ingress
+  - Ingress
   ingress:
   - from:
       - ipBlock:
-          cidr: 10.0.0.0/16
+        cidr: 10.0.0.0/16
     ports:
     - protocol: TCP
       port: 80
