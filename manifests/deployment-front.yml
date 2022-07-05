@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: azure-vote-front-Critique
+  name: azure-vote-front-critique
   namespace: vote
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: azure-vote-front-Critique
+      app: azure-vote-front-critique
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -16,10 +16,10 @@ spec:
   template:
     metadata:
       labels:
-        app: azure-vote-front-Critique
+        app: azure-vote-front-critique
     spec:
       containers:
-      - name: azure-vote-front-Critique
+      - name: azure-vote-front-critique
         image: standardsIMG.azurecr.io/vote-front:latest
         ports:
         - containerPort: 80
@@ -35,10 +35,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: azure-vote-front-Critique
+  name: azure-vote-front-critique
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: azure-vote-front-Critique
+    app: azure-vote-front-critique
