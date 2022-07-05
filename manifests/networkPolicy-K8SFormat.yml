@@ -2,7 +2,7 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
   name: default-deny-all
-  namespace: default
+  namespace: vote
 spec:
   podSelector: {}
   ingress: []
@@ -13,7 +13,7 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
   namespace: vote
-  name: deny-from-other-namespaces
+  name: allow-only-from-internet
 spec:
   podSelector:
     matchLabels:
