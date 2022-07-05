@@ -9,7 +9,7 @@ spec:
       app: azure-vote-front
   policyTypes: Ingress
   ingress:
-    from:
-      namespaceSelector:
-        matchLabels:
-          name: vote
+    - from:
+       namespaceSelector:
+         matchLabels:
+           name: vote
