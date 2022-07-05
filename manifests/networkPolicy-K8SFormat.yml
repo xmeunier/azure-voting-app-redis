@@ -14,6 +14,6 @@ spec:
        - namespaceSelector:
            matchLabels:
             name: vote
-      port:
+      ports:
         - protocol: TCP
           port: 80
