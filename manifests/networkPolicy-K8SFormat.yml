@@ -1,22 +1,11 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: default-deny-all
   namespace: vote
-spec:
-  podSelector: {}
-  ingress: []
-
----
-
-kind: NetworkPolicy
-apiVersion: networking.k8s.io/v1
-metadata:
-  namespace: vote
-  name: allow-only-from-internet
+  name: deny-from-other-namespaces
 spec:
   podSelector:
     matchLabels:
-      app: azure-vote-front
   ingress:
-  - {}
+  - from:
+    - podSelector: {}
