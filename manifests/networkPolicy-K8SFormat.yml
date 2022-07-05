@@ -9,3 +9,17 @@ spec:
   ingress:
   - from:
     - podSelector: {}
+    
+ ---
+ 
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: vote
+  name: allow-only-from-internet
+spec:
+  podSelector:
+    matchLabels:
+      app: azure-vote-front
+  ingress:
+  - {}
