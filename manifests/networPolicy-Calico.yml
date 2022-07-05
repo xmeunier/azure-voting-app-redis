@@ -1,0 +1,19 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: allow-only-from-internet-calico
+spec:
+  selector: app == 'azure-vote-front'
+  types:
+  - Ingress
+  ingress:
+  - action: Allow
+    metadata:
+      annotations:
+        to: database
+    protocol: TCP
+    source:
+      selector: role == 'frontend'
+    destination:
+      ports:
+      - 6379
