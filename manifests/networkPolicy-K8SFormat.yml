@@ -7,6 +7,3 @@ spec:
   podSelector:
     matchLabels:
       app: azure-vote-front
-  ingress:
-  - from:
-    - podSelector: {}
