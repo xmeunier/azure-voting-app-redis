@@ -35,6 +35,6 @@ jobs:
       with:
         namespace: ${{ env.NAMESPACE }}
         manifests: |
-          manifests/networkPolicy-K8SFormat.yml
+          manifests/networkPolicy-calico.yml
         images: |
           ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:latest
